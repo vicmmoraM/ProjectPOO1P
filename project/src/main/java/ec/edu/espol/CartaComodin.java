@@ -11,5 +11,8 @@ public class CartaComodin extends Carta{
     public String getSimbolo(){
         return this.simbolo;
     }
-    
+
+    public void setSimbolo(String simbolo){
+        this.simbolo = simbolo;
+    }
 }
