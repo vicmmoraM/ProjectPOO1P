@@ -15,5 +15,5 @@ public abstract class Carta {
         this.carta = carta;
     }
 
-    public abstract boolean validadCarta(Carta carta);
+    public abstract boolean validarCarta(Carta carta);
 }

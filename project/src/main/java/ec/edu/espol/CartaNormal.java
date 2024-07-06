@@ -16,19 +16,13 @@ public class CartaNormal extends Carta{
         this.numero = numero;
     }
 
-    public boolean validadCarta(Carta carta){
+    public boolean validarCarta(Carta carta){
         if(carta instanceof CartaNormal){
             CartaNormal cn = (CartaNormal) carta; 
-            if(this.getCarta().equals(cn.getCarta()) && this.getNumero() == cn.getNumero()){
+            if(this.getCarta().equals(cn.getCarta()) || this.getNumero() == cn.getNumero()){
                 return true;
             }
         }
-        else{
-            CartaComodin cc = (CartaComodin) carta;
-            if(this.getCarta().equals(cc.getCarta())){
-                return true;
-            }
-        }
-        return false;
+        return false; 
     }
 }
