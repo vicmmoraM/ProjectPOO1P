@@ -6,4 +6,14 @@ public abstract class Carta {
     public Carta(Colores carta){
         this.carta = carta;
     }
+
+    public Colores getCarta() {
+        return carta;
+    }
+
+    public void setCarta(Colores carta) {
+        this.carta = carta;
+    }
+
+    
 }
