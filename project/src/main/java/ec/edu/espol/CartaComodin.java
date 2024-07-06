@@ -16,5 +16,4 @@ public class CartaComodin extends Carta{
         this.simbolo = simbolo;
     }
 
-    
 }
