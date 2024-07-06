@@ -1,5 +1,6 @@
 package ec.edu.espol;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CartaBaraja {
     private ArrayList<Carta> cartas;
@@ -39,4 +40,13 @@ public class CartaBaraja {
         }
     }
 
+    public void barajar(){
+        Collections.shuffle(cartas);
+    }
+
+    public Carta chuparCarta(){ //la baraja esta de cabeza y asi se chupa la carta final
+        return cartas.remove(cartas.size()-1);
+    }
 }
+
+
