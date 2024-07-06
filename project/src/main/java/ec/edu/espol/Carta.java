@@ -15,5 +15,5 @@ public abstract class Carta {
         this.carta = carta;
     }
 
-    
+    public abstract boolean puedeJugar(Carta carta);
 }

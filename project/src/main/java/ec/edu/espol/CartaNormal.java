@@ -16,5 +16,5 @@ public class CartaNormal extends Carta{
         this.numero = numero;
     }
 
-    
+
 }
