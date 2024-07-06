@@ -7,4 +7,9 @@ public class CartaComodin extends Carta{
         super(carta);
         this.simbolo = simbolo;
     }
+
+    public String getSimbolo(){
+        return this.simbolo;
+    }
+    
 }
