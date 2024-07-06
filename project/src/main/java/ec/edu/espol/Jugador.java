@@ -2,7 +2,7 @@ package ec.edu.espol;
 import java.util.ArrayList;
 public class Jugador {
     private String nombre;
-    private ArrayList<Carta> baraja;
+    private ArrayList<Carta> barajaJugador;
 
     public Jugador(String nombre){
         this.nombre = nombre;
@@ -15,11 +15,11 @@ public class Jugador {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public ArrayList<Carta> getBaraja() {
-        return baraja;
+    public ArrayList<Carta> getBarajaJugador() {
+        return barajaJugador;
     }
-    public void setBaraja(ArrayList<Carta> baraja) {
-        this.baraja = baraja;
+    public void setBarajaJugador(ArrayList<Carta> barajaJugador) {
+        this.barajaJugador = barajaJugador;
     }
 
     public void barajaInicial(ArrayList<Carta> carta){
