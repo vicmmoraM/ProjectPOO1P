@@ -37,7 +37,7 @@ public class Jugador {
             System.out.println((i + 1) + ". " + manoJugador.get(i));
         }
     
-        System.out.print("Selecciona una carta (1-" + manoJugador.size() + "): ");
+        System.out.print("Selecciona una carta (1-" + manoJugador.size() + "):  ");
         int seleccion = scanner.nextInt() - 1;
     
         while (seleccion < 0 || seleccion >= manoJugador.size()) {
@@ -62,7 +62,7 @@ public class Jugador {
                     cartaValida = true;
                     return cartaJugador;
                 } else {
-                    System.out.println("Carta normal inválida. Por favor, selecciona otra carta:");
+                    System.out.println("Carta normal inválida. Por favor, selecciona otra carta: ");
                     cartaJugador = otraCarta(scanner, manoJugador);
                 }
             } else if (cartaActual instanceof CartaComodin && cartaJugador instanceof CartaComodin) {
@@ -93,19 +93,17 @@ public class Jugador {
         if (c instanceof ComodinEspecial) { 
             ComodinEspecial ce = (ComodinEspecial) c;
             if (ce.getSimbolo().equals("+4")) {
-                System.out.println("Chupa cuatro cartas :()");
+                System.out.println("Chupa cuatro cartas :(");
                 for (int i = 0; i < 4; i++) {
                     Carta cartaChupada = mazo.chuparCarta();
                     if (turnoActual == 0) {
-                        System.out.println("xd");
                         j1.getBarajaJugador().add(cartaChupada);
                     } else {
-                        System.out.println("xd");
                         bot.getBarajaJugador().add(cartaChupada);
                     }
                 }
             } else if (ce.getSimbolo().equals("+2")) {
-                System.out.println("Toma dos cartas :()");
+                System.out.println("Toma dos cartas :(");
                 for (int i = 0; i < 2; i++) {
                     Carta cartaChupada = mazo.chuparCarta();
                     if (turnoActual == 0) {
@@ -127,6 +125,17 @@ public class Jugador {
         }
     }
 
+    public void mostrarInformacion() {
+        System.out.println("Jugador: " + nombre);
+        System.out.print("Baraja del jugador: [");
+        for (int i = 0; i < barajaJugador.size(); i++) {
+            System.out.print(barajaJugador.get(i));
+            if (i < barajaJugador.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
 
     @Override
     public String toString() {

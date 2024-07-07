@@ -51,7 +51,7 @@ public class Juego {
         // Empieza el Juego
         while (!(j1.getBarajaJugador().isEmpty() || bot.getBarajaJugador().isEmpty())) {
             if (turno == 1) {
-                System.out.println("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + ")");
+                System.out.print("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + "): ");
                 int index = sc.nextInt();
     
                 System.out.print("Baraja Jugador:");
@@ -59,7 +59,7 @@ public class Juego {
     
                 while (index < 0 || index > (j1.getBarajaJugador().size() - 1)) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
-                    System.out.println("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + ")");
+                    System.out.print("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + "): ");
                     index = sc.nextInt();
                     sc.nextLine();
                 }
@@ -68,7 +68,6 @@ public class Juego {
                 cartaJugador = Jugador.LanzarCarta(cartaTablero, cartaJugador, j1.getBarajaJugador());
     
                 System.out.println("Carta en el tablero: " + cartaJugador);
-    
                 // Aplicar efecto del comodín si es necesario
                 if (cartaJugador instanceof ComodinEspecial || cartaJugador instanceof CartaComodin) {
                     Jugador.ComodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
@@ -77,11 +76,14 @@ public class Juego {
                 cartaTablero = cartaJugador;
                 j1.getBarajaJugador().remove(cartaJugador); // Quitar la carta jugada
                 turno = 0; // Cambio de turno
+                j1.mostrarInformacion();
+
             } else {
+                // turno del BOT
                 System.out.print("Baraja BOT: ");
                 System.out.println(bot.getBarajaJugador());
                 System.out.println("Turno del BOT (ADRIAN)");
-    
+                // Carta aleatoria para el bot
                 int num = Bot.Randomnum(bot.getBarajaJugador().size());
                 Carta cartaBot = bot.getBarajaJugador().get(num);
                 Bot.LanzarCartaB(cartaTablero, cartaBot, bot.getBarajaJugador());
