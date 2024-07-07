@@ -24,4 +24,10 @@ public class CartaComodin extends Carta{
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "CartaComodin [simbolo=" + simbolo + "]";
+    }
+
+    
 }

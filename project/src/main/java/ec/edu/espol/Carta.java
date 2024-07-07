@@ -16,4 +16,10 @@ public abstract class Carta {
     }
 
     public abstract boolean validarCarta(Carta carta);
+
+    @Override
+    public String toString() {
+        return "Carta [carta=" + carta + "]";
+    }
+
 }

@@ -25,4 +25,11 @@ public class CartaNormal extends Carta{
         }
         return false; 
     }
+
+    @Override
+    public String toString() {
+        return "CartaNormal [numero=" + numero + "]";
+    }
+
+    
 }

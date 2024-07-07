@@ -17,12 +17,9 @@ public class Bot {
         this.barajaBot = barajaBot;
     }
 
-    public void barajaInicial(ArrayList<Carta> carta){
-        Random r = new Random();
+    public void barajaInicial(ArrayList<Carta> cartaBaraja){
         for(int i = 0; i < 7; i++){
-            int indice = r.nextInt(carta.size() + 1) - 1;
-            barajaBot.add(carta.get(indice));
-            carta.remove(indice);
+            barajaBot.add(cartaBaraja.remove(cartaBaraja.size()-1));
         }
     }
 

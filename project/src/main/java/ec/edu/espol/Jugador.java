@@ -24,13 +24,15 @@ public class Jugador {
         this.barajaJugador = barajaJugador;
     }
 
-    public void barajaInicial(ArrayList<Carta> carta){
-        Random r = new Random();
+    public void barajaInicial(ArrayList<Carta> cartaBaraja){
         for(int i = 0; i < 7; i++){
-            int indice = r.nextInt(carta.size() + 1) - 1;
-            barajaJugador.add(carta.get(indice));
-            carta.remove(indice);
+            barajaJugador.add(cartaBaraja.remove(cartaBaraja.size()-1));
         }
+    }
+
+    @Override
+    public String toString() {
+        return "barajaJugador=" + barajaJugador;
     }
     
 }

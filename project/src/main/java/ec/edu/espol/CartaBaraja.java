@@ -47,6 +47,13 @@ public class CartaBaraja {
     public Carta chuparCarta(){ //la baraja esta de cabeza y asi se chupa la carta final
         return cartas.remove(cartas.size()-1);
     }
+
+    @Override
+    public String toString() {
+        return "CartaBaraja [cartas=" + cartas + "]";
+    }
+
+    
 }
 
 
