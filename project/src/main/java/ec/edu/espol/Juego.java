@@ -142,6 +142,7 @@ public class Juego {
                     turno = 1;
                 } else if (cartaJugador instanceof CartaComodin) {
                     int turnoNuevo = Jugador.Comodin(cartaJugador, j1, bot, mazo, 1);
+                    j1.getBarajaJugador().remove(cartaJugador);
                     turno = turnoNuevo;
                 } else {
                     cartaInicial = cartaJugador;
@@ -179,7 +180,12 @@ public class Juego {
                     cartaInicial = cartaNueva;
                     j1.mostrarInformacion();
                     turno = 0;
-                } else {
+
+                }else if (cartaBot instanceof CartaComodin) {
+                    int turnoNuevo = Jugador.Comodin(cartaBot, j1, bot, mazo, 1);
+                    turno = turnoNuevo; 
+                }
+                else {
                     cartaInicial = cartaBot;
                     bot.getBarajaBot().remove(cartaBot); // Quitar la carta jugada
                     turno = 1; // Cambio de turno
