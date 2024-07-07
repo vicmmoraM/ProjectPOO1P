@@ -1,5 +1,7 @@
 package ec.edu.espol;
 import java.util.ArrayList;
+import java.util.Random;
+
 public class Jugador {
     private String nombre;
     private ArrayList<Carta> barajaJugador;
