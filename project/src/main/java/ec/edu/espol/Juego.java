@@ -32,59 +32,52 @@ public class Juego {
         return jugador;
     }
 
-    public static void ComodinesEspeciales(ComodinEspecial c, Jugador j1, Jugador bot, CartaBaraja mazo, int t){
+    public static void ComodinesEspeciales(Carta c, Jugador j1, Jugador bot, CartaBaraja mazo, int t){
         Scanner sc = new Scanner(System.in);
-        if(c.getSimbolo().equals("+4")){
-            System.out.println("Toma cuatro cartas :()");
-            for(int i = 0; i<4 ; i++){
-                Carta cartaChupada = mazo.chuparCarta();
-                if(t == 0){
-                    j1.getBarajaJugador().add(cartaChupada);
+        if(c instanceof ComodinEspecial){ 
+            ComodinEspecial ce = (ComodinEspecial) c;
+            if(ce.getSimbolo().equals("+4")){
+                System.out.println("Toma cuatro cartas :()");
+                for(int i = 0; i<4 ; i++){
+                    Carta cartaChupada = mazo.chuparCarta();
+                    if(t == 0){
+                        j1.getBarajaJugador().add(cartaChupada);
+                        t = 0;
+                    }
+                    else{
+                        bot.getBarajaJugador().add(cartaChupada);
+                        t = 1;
+                    }   
+                }
+            }
+            if(ce.getSimbolo().equals("+2")){
+                System.out.println("Toma dos cartas :()");
+                for(int i = 0; i<2 ; i++){
+                    Carta cartaChupada = mazo.chuparCarta();
+                    if(t == 0){
+                        j1.getBarajaJugador().add(cartaChupada);
+                        t = 0;
+                    }
+                    else{
+                        bot.getBarajaJugador().add(cartaChupada);
+                        t = 1;
+                    }
+                }
+            }
+        }
+        else{
+            CartaComodin cc = (CartaComodin) c;
+            if(cc.getSimbolo().equals("^")){ // Reverse
+                if(t == 1){
+                    System.out.println("El bot pierde su turno");
+                    t = 1;
                 }
                 else{
-                    bot.getBarajaJugador().add(cartaChupada);
+                    System.out.println(j1.getNombre() + "pierdes tu turno :(");
+                    t = 0;
                 }
             }
         }
-        if(c.getSimbolo().equals("+2")){
-            System.out.println("Toma dos cartas :()");
-            for(int i = 0; i<2 ; i++){
-                Carta cartaChupada = mazo.chuparCarta();
-                if(t == 0){
-                    j1.getBarajaJugador().add(cartaChupada);
-                }
-                else{
-                    bot.getBarajaJugador().add(cartaChupada);
-                }
-            }
-        }
-    }
-
-    public static int identificarComodines(CartaComodin c, Jugador j1, Jugador bot, CartaBaraja mazo, int t){
-        int tnuevo = 0;
-        if(c.getSimbolo().equals("^")){ // Reverse
-            if(t == 1){
-                System.out.println("El bot pierde su turno");
-                tnuevo = 1;
-                return tnuevo;
-            }
-
-            System.out.println(j1.getNombre() + "perdiste tu turno :()");
-            tnuevo = 0;
-            return tnuevo;
-        }
-        if(c.getSimbolo().equals("&")){ //bloqueo
-            if(t == 1){
-                System.out.println("El bot pierde su turno");
-                tnuevo = 1;
-                return tnuevo;
-            }
-
-            System.out.println(j1.getNombre() + "perdiste tu turno :()");
-            tnuevo = 0;
-            return tnuevo;
-        }
-        return tnuevo;
     }
 
     public static void  iniciarJuego(Jugador j1,Jugador bot,CartaBaraja mazo){
@@ -109,10 +102,11 @@ public class Juego {
             System.out.println("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + ")");
             int index = sc.nextInt();
 
-            sc.nextLine();
-
             if(Turno == 1){
+
+                System.out.print("Baraja Jugador:");
                 System.out.println(j1.getBarajaJugador());
+
                 while(index < 0 || index > (j1.getBarajaJugador().size()-1)){
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
                     System.out.println("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + ")");
@@ -121,18 +115,23 @@ public class Juego {
                 }
                 Carta CartaJugador = j1.getBarajaJugador().get(index);
                 
-                Jugador.LanzarCarta(CartaTablero,CartaJugador);
-                System.out.println("Carta en el tablero: " + CartaJugador);
-                CartaTablero = CartaJugador;
+                Carta cartaJugador =Jugador.LanzarCarta(CartaTablero,CartaJugador,(j1.getBarajaJugador()));
+                System.out.println("Carta en el tablero: "+ cartaJugador);
+                CartaTablero = cartaJugador;
                 j1.getBarajaJugador().remove(index);
                 Turno = Turno - 1;
             }
             if(Turno == 0){
+                System.out.print("Baraja BOT: ");
                 System.out.println(bot.getBarajaJugador());
                 System.out.println("Turno del BOT(ADRIAN)");
     
                 int num = Bot.Randomnum((bot.getBarajaJugador().size()));
-                Bot.LanzarCartaB(CartaTablero, (bot.getBarajaJugador().get(num)));
+                Carta cartaBot = bot.getBarajaJugador().get(num);
+                Bot.LanzarCartaB(CartaTablero, cartaBot, bot.getBarajaJugador());
+                System.out.println("Carta en el tablero: "+ cartaBot);
+                CartaTablero = cartaBot;
+                bot.getBarajaJugador().remove(num);
                 Turno = Turno + 1;
             }
 

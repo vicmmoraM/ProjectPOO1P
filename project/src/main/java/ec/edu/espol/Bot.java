@@ -2,6 +2,7 @@ package ec.edu.espol;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Bot{
      private String nombre;
@@ -26,23 +27,49 @@ public class Bot{
         }
     }
 
-    public static void LanzarCartaB(Carta cartaActual, Carta CartaBot){
-        if(cartaActual instanceof CartaNormal){
-            CartaNormal CartaN = (CartaNormal) cartaActual;
-            if(CartaBot.validarCarta(CartaN)){
-                System.out.println(CartaBot);
+    public static Carta LanzarCartaB(Carta cartaActual, Carta cartaBot, ArrayList<Carta> barajabot){
+        boolean cartaValida = false;
+        while(!(cartaValida)){
+            if (cartaActual instanceof CartaNormal && cartaBot instanceof CartaNormal) {
+                CartaNormal cartaN = (CartaNormal) cartaActual;
+                if (cartaBot.validarCarta(cartaN)){
+                    System.out.println(cartaBot);
+                    cartaActual = cartaN;
+                    cartaValida = true;
+                    return cartaN;
+                } 
+                else{
+                    int indiceNuevo = Randomnum((barajabot.size()-1));
+                    cartaBot = barajabot.get(indiceNuevo);
+                    return cartaActual;
+                }
             }
-        } 
-        if(cartaActual instanceof CartaComodin){
-            CartaComodin CartaC =(CartaComodin) cartaActual;
-            if(CartaBot.validarCarta(CartaC)){
-                System.out.println(CartaBot);
+            else if (cartaActual instanceof CartaComodin && cartaBot instanceof CartaComodin) {
+                CartaComodin cartaC = (CartaComodin) cartaActual;
+                if (cartaBot.validarCarta(cartaC)) {
+                    System.out.println(cartaBot);
+                    cartaValida = true;
+                    return cartaC;
+                } 
+                else {
+                    int indiceNuevo = Randomnum((barajabot.size()-1));
+                    cartaBot = barajabot.get(indiceNuevo);
+                    return cartaActual;
+                } 
+            }
+            else if (cartaBot instanceof ComodinEspecial) {
+                ComodinEspecial cartaE = (ComodinEspecial) cartaBot;
+                System.out.println(cartaE);
+                cartaValida = true; // No se requiere validación para comodines especiales
+                return cartaE;
+            }
+            else{
+                int indiceNuevo = Randomnum((barajabot.size()-1));
+                    cartaBot = barajabot.get(indiceNuevo);
+                return cartaActual;
             }
         }
-        if(CartaBot instanceof ComodinEspecial){
-            ComodinEspecial CartaE = (ComodinEspecial) CartaBot;
-            System.out.println(CartaE);
-        }
+        return cartaActual;
     }
 
     public static int Randomnum(int cantidad){
