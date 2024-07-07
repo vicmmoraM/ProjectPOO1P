@@ -1,6 +1,7 @@
 package ec.edu.espol;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Jugador {
@@ -88,9 +89,8 @@ public class Jugador {
     
         return cartaJugador; // Devolver la carta válida final seleccionada
     }
-    
-    public static void ComodinesEspeciales(Carta c, Jugador j1, Jugador bot, CartaBaraja mazo, int turnoActual) {
-        if (c instanceof ComodinEspecial) { 
+    public static Colores ComodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {
+        if (c instanceof ComodinEspecial) {
             ComodinEspecial ce = (ComodinEspecial) c;
             if (ce.getSimbolo().equals("+4")) {
                 System.out.println("Chupa cuatro cartas :(");
@@ -99,8 +99,18 @@ public class Jugador {
                     if (turnoActual == 0) {
                         j1.getBarajaJugador().add(cartaChupada);
                     } else {
-                        bot.getBarajaJugador().add(cartaChupada);
+                        bot.getBarajaBot().add(cartaChupada);
                     }
+                }
+                if(turnoActual == 0){
+                    Colores[] valoresColores = Colores.values(); // Obtener todos los valores del enum
+                    Random random = new Random();
+                    Colores colorBot = valoresColores[random.nextInt(valoresColores.length)]; // Obtener color aleatorio
+                    return colorBot;
+                }
+                else{
+                    Colores color = ComodinEspecial.elegirColor();
+                    return color;
                 }
             } else if (ce.getSimbolo().equals("+2")) {
                 System.out.println("Toma dos cartas :(");
@@ -109,20 +119,25 @@ public class Jugador {
                     if (turnoActual == 0) {
                         j1.getBarajaJugador().add(cartaChupada);
                     } else {
-                        bot.getBarajaJugador().add(cartaChupada);
+                        bot.getBarajaBot().add(cartaChupada);
                     }
                 }
-            }
-        } else if (c instanceof CartaComodin) {
-            CartaComodin cc = (CartaComodin) c;
-            if (cc.getSimbolo().equals("^")) { // Reverse
-                if (turnoActual == 1) {
-                    System.out.println("El bot pierde su turno");
-                } else {
-                    System.out.println(j1.getNombre() + ", pierdes tu turno :(");
+                if(turnoActual == 0){
+                    Colores[] valoresColores = Colores.values(); // Obtener todos los valores del enum
+                    Random random = new Random();
+                    Colores colorBot = valoresColores[random.nextInt(valoresColores.length)]; // Obtener color aleatorio
+                    return colorBot;
                 }
+                else{
+                    Colores color = ComodinEspecial.elegirColor();
+                    return color;
+                }
+            } else {
+                Colores color = ComodinEspecial.elegirColor();
+                return color;
             }
         }
+        return null; // Retornar null si la carta no es un ComodinEspecial o no se puede manejar
     }
 
     public void mostrarInformacion() {

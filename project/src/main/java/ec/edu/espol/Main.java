@@ -11,11 +11,12 @@ public class Main {
         baraja.generarCartas();
         baraja.barajar();
         Jugador j1 = Juego.agregarJugador();
-        Jugador j2 = new Jugador("Bot");
+        Bot j2 = new Bot();
         j1.barajaInicial(baraja.getCartas());
-        j2.barajaInicial(baraja.getCartas());
+        j2.barajaInicialB(baraja.getCartas());
         System.out.println(j1);
         System.out.println(j2);
-        Juego.iniciarJuego(j1,j2,baraja);
+        Carta cartaInicial = Juego.cartaInicial(baraja);
+        Juego.iniciarJuego(j1,j2,baraja,cartaInicial);
     }
 }
