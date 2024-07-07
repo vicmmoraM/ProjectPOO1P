@@ -23,13 +23,32 @@ public class Juego {
     public void setBot(Jugador bot) {
         this.bot = bot;
     }
+    
 
+    }
     public static Jugador agregarJugador(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Ingresa tu nombre: ");
         String nombre = sc.nextLine();
         Jugador jugador = new Jugador(nombre);
         return jugador;
+    }
+    
+    public static Carta cartaInicial(CartaBaraja barajaCompleta){
+        Random r = new Random();
+        Scanner sc = new Scanner(System.in);
+        int indice = r.nextInt(barajaCompleta.getCartas().size() - 1);
+
+        // Lanzamiento de Carta Inicial
+        while (!(barajaCompleta.getCartas().get(indice) instanceof CartaNormal)) {
+            indice = r.nextInt(barajaCompleta.getCartas().size() - 1);
+        }
+
+        System.out.print("Carta Actual: ");
+        System.out.println(barajaCompleta.getCartas().get(indice));
+        Carta cartaTablero = barajaCompleta.getCartas().get(indice); // Carta Actual
+        barajaCompleta.removerCarta(indice);
+        return cartaTablero;
     }
 
     public static void iniciarJuego(Jugador j1, Jugador bot, CartaBaraja mazo, Carta cartaInicial) {

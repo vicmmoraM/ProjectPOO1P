@@ -26,7 +26,7 @@ public class Bot{
         }
     }
 
-    public static Carta LanzarCartaB(Carta cartaActual, Carta cartaBot, ArrayList<Carta> barajabot) {
+    public static Carta lanzarCartaB(Carta cartaActual, Carta cartaBot, ArrayList<Carta> barajabot) {
         boolean cartaValida = false;
         while (!cartaValida) {
             if (cartaActual instanceof CartaNormal && cartaBot instanceof CartaNormal) {
@@ -35,7 +35,7 @@ public class Bot{
                     cartaValida = true;
                     return cartaBot;
                 } else {
-                    int indiceNuevo = Randomnum(barajabot.size() - 1);
+                    int indiceNuevo = randomnum(barajabot.size() - 1);
                     cartaBot = barajabot.get(indiceNuevo);
                 }
             } else if (cartaActual instanceof CartaComodin && cartaBot instanceof CartaComodin) {
@@ -44,7 +44,7 @@ public class Bot{
                     cartaValida = true;
                     return cartaBot;
                 } else {
-                    int indiceNuevo = Randomnum(barajabot.size() - 1);
+                    int indiceNuevo = randomnum(barajabot.size() - 1);
                     cartaBot = barajabot.get(indiceNuevo);
                 }
             } else if (cartaBot instanceof ComodinEspecial) {
@@ -52,14 +52,14 @@ public class Bot{
                 cartaValida = true; // No se requiere validación para comodines especiales
                 return cartaE;
             } else {
-                int indiceNuevo = Randomnum(barajabot.size() - 1);
+                int indiceNuevo = randomnum(barajabot.size() - 1);
                 cartaBot = barajabot.get(indiceNuevo);
             }
         }
         return cartaBot; // Devuelve la carta válida encontrada
     }
 
-    public static int Randomnum(int cantidad){
+    public static int randomnum(int cantidad){
         Random r = new Random();
         int numero = r.nextInt(cantidad);
         return numero;
