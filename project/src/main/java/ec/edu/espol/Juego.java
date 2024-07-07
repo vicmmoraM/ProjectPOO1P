@@ -32,22 +32,9 @@ public class Juego {
         return jugador;
     }
 
-    public static void iniciarJuego(Jugador j1, Jugador bot, CartaBaraja mazo) {
-        Random r = new Random();
+    public static void iniciarJuego(Jugador j1, Jugador bot, CartaBaraja mazo, Carta cartaInicial) {
         Scanner sc = new Scanner(System.in);
-        int indice = r.nextInt(mazo.getCartas().size() - 1);
-    
-        // Lanzamiento de Carta Inicial
         int turno = 1;
-        while (!(mazo.getCartas().get(indice) instanceof CartaNormal)) {
-            indice = r.nextInt(mazo.getCartas().size() - 1);
-        }
-    
-        System.out.print("Carta Inicial: ");
-        System.out.println(mazo.getCartas().get(indice));
-        Carta cartaTablero = mazo.getCartas().get(indice); // Carta Actual
-        mazo.removerCarta(indice);
-    
         // Empieza el Juego
         while (!(j1.getBarajaJugador().isEmpty() || bot.getBarajaJugador().isEmpty())) {
             if (turno == 1) {
@@ -56,37 +43,40 @@ public class Juego {
     
                 System.out.print("Baraja Jugador:");
                 System.out.println(j1.getBarajaJugador());
-    
+
+                //Validación Carta Correcta
+
                 while (index < 0 || index > (j1.getBarajaJugador().size() - 1)) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
                     System.out.print("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + "): ");
                     index = sc.nextInt();
                     sc.nextLine();
                 }
-                
+                //Generamos cartaJugador 
                 Carta cartaJugador = j1.getBarajaJugador().get(index);
-                cartaJugador = Jugador.LanzarCarta(cartaTablero, cartaJugador, j1.getBarajaJugador());
+                cartaJugador = Jugador.LanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
     
                 System.out.println("Carta en el tablero: " + cartaJugador);
                 // Aplicar efecto del comodín si es necesario
                 if (cartaJugador instanceof ComodinEspecial || cartaJugador instanceof CartaComodin) {
                     Jugador.ComodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
                 }
-    
-                cartaTablero = cartaJugador;
+                
+                cartaInicial = cartaJugador;
                 j1.getBarajaJugador().remove(cartaJugador); // Quitar la carta jugada
                 turno = 0; // Cambio de turno
                 j1.mostrarInformacion();
 
             } else {
                 // turno del BOT
+                System.out.println("--------------------");
                 System.out.print("Baraja BOT: ");
                 System.out.println(bot.getBarajaJugador());
                 System.out.println("Turno del BOT (ADRIAN)");
                 // Carta aleatoria para el bot
                 int num = Bot.Randomnum(bot.getBarajaJugador().size());
                 Carta cartaBot = bot.getBarajaJugador().get(num);
-                Bot.LanzarCartaB(cartaTablero, cartaBot, bot.getBarajaJugador());
+                Bot.LanzarCartaB(cartaInicial, cartaBot, bot.getBarajaJugador());
     
                 System.out.println("Carta en el tablero: " + cartaBot);
     
@@ -95,12 +85,13 @@ public class Juego {
                     Jugador.ComodinesEspeciales(cartaBot, j1, bot, mazo, 0);
                 }
     
-                cartaTablero = cartaBot;
+                cartaInicial = cartaBot;
                 bot.getBarajaJugador().remove(cartaBot); // Quitar la carta jugada
                 turno = 1; // Cambio de turno
+                System.out.println("--------------------");
             }
         }
     
-        sc.close(); // Cerrar el escáner al final del juego
+        sc.close(); // Cerrar el escáner al final del juego :(
     }
 }
