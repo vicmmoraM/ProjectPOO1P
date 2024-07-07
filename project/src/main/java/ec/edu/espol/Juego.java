@@ -1,5 +1,7 @@
 package ec.edu.espol;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Juego {
     private ArrayList<Carta> barajaBot;
     private ArrayList<Carta> barajaJugador;
@@ -17,4 +19,11 @@ public class Juego {
         this.barajaJugador = barajaJugador;
     }
 
+    public Jugador agregarJugador(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingresa tu nombre: ");
+        String nombre = sc.nextLine();
+        Jugador jugador = new Jugador(nombre);
+        return jugador;
+    }
 }
