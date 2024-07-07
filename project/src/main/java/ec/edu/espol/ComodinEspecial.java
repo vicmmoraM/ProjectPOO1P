@@ -1,4 +1,5 @@
 package ec.edu.espol;
+import java.util.Scanner;
 
 public class ComodinEspecial extends CartaComodin{
     public ComodinEspecial(Colores carta, String simbolo){
