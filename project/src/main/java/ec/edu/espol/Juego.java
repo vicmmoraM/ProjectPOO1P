@@ -88,6 +88,9 @@ public class Juego {
                     turno = 0; // Cambio de turno
                     j1.mostrarInformacion(); 
                 }
+                if(j1.getBarajaJugador().size() == 1){
+                    System.out.println("UNOOOOOO");
+                }
             } else {
                 // turno del BOT
                 System.out.println("--------------------");
@@ -104,12 +107,23 @@ public class Juego {
                 // Aplicar efecto del comodín si es necesario
                 if (cartaBot instanceof ComodinEspecial || cartaBot instanceof CartaComodin) {
                     Jugador.ComodinesEspeciales(cartaBot, j1, bot, mazo, 0);
+                    Colores color = Jugador.ComodinesEspeciales(cartaBot, j1, bot, mazo, 1);
+                    Carta cartaNueva = new CartaNormal(color,10);
+                    bot.getBarajaBot().remove(cartaBot);
+                    cartaInicial = cartaNueva;
+                    j1.mostrarInformacion(); 
+                    turno = 0;
                 }
-    
-                cartaInicial = cartaBot;
-                bot.getBarajaBot().remove(cartaBot); // Quitar la carta jugada
-                turno = 1; // Cambio de turno
-                System.out.println("--------------------");
+                else{
+                    cartaInicial = cartaBot;
+                    bot.getBarajaBot().remove(cartaBot); // Quitar la carta jugada
+                    turno = 1; // Cambio de turno
+                    System.out.println("--------------------");
+                }
+                if(bot.getBarajaBot().size() == 1){
+                    System.out.println("UNO; bot: i'd win");
+                }
+                
             }
         }
     
