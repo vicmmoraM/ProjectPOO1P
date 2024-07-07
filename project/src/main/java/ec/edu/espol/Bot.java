@@ -1,5 +1,7 @@
 package ec.edu.espol;
 import java.util.ArrayList;
+import java.util.Random;
+
 public class Bot {
     private ArrayList<Carta> barajaBot;
 
@@ -7,12 +9,12 @@ public class Bot {
         this.barajaBot = new ArrayList<>();
     }
 
-    public ArrayList<Carta> getBaraja() {
-        return baraja;
+    public ArrayList<Carta> getBarajaBot() {
+        return barajaBot;
     }
 
-    public void setBaraja(ArrayList<Carta> baraja) {
-        this.baraja = baraja;
+    public void setBarajaBot(ArrayList<Carta> barajaBot) {
+        this.barajaBot = barajaBot;
     }
 
     public void barajaInicial(ArrayList<Carta> carta){
