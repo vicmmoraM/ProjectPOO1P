@@ -19,7 +19,7 @@ public abstract class Carta {
 
     @Override
     public String toString() {
-        return "Color: " + carta + "\n";
+        return carta + " ";
     }
 
 }

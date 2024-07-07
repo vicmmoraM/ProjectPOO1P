@@ -42,7 +42,7 @@ public class CartaNormal extends Carta{
 
     @Override
     public String toString() {
-        return super.toString() + " Número: " + numero+ "\n";
+        return super.toString() + numero + " ";
     }
 
     

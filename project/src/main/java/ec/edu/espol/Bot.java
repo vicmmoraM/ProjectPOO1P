@@ -1,6 +1,7 @@
 package ec.edu.espol;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bot{
      private String nombre;
@@ -25,7 +26,7 @@ public class Bot{
         }
     }
 
-    public static void LanzarCarta(Carta cartaActual, Carta CartaBot){
+    public static void LanzarCartaB(Carta cartaActual, Carta CartaBot){
         if(cartaActual instanceof CartaNormal){
             CartaNormal CartaN = (CartaNormal) cartaActual;
             if(CartaBot.validarCarta(CartaN)){
@@ -42,6 +43,12 @@ public class Bot{
             ComodinEspecial CartaE = (ComodinEspecial) CartaBot;
             System.out.println(CartaE);
         }
+    }
+
+    public static int Randomnum(int cantidad){
+        Random r = new Random();
+        int numero = r.nextInt(cantidad);
+        return numero;
     }
 
     @Override
