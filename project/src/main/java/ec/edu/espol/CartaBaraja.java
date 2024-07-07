@@ -1,6 +1,7 @@
 package ec.edu.espol;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class CartaBaraja {
     private ArrayList<Carta> cartas;
@@ -50,6 +51,17 @@ public class CartaBaraja {
         return cartas.remove(cartas.size()-1);
     }
 
+    public Carta CartaRandom(){
+        Random r = new Random();
+        int indice = r.nextInt(cartas.size());
+        Carta c = cartas.remove(indice);
+        return c;
+    }
+
+    public void removerCarta(int indice){
+        cartas.remove(indice);
+    }
+    
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

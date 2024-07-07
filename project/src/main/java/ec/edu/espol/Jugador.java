@@ -29,6 +29,25 @@ public class Jugador {
         }
     }
 
+    public static void LanzarCarta(Carta cartaActual, Carta CartaJugador){
+        if(cartaActual instanceof CartaNormal){
+            CartaNormal CartaN = (CartaNormal) cartaActual;
+            if(CartaJugador.validarCarta(CartaN)){
+                System.out.println(CartaJugador);
+            }
+        } 
+        if(cartaActual instanceof CartaComodin){
+            CartaComodin CartaC =(CartaComodin) cartaActual;
+            if(CartaJugador.validarCarta(CartaC)){
+                System.out.println(CartaJugador);
+            }
+        }
+        if(CartaJugador instanceof ComodinEspecial){
+            ComodinEspecial CartaE = (ComodinEspecial) CartaJugador;
+            System.out.println(CartaE);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
