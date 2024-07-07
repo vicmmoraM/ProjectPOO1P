@@ -2,7 +2,6 @@ package ec.edu.espol;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Scanner;
 
 public class Jugador {
     private String nombre;
@@ -32,22 +31,21 @@ public class Jugador {
         }
     }
 
-    private static Carta otraCarta(Scanner scanner, ArrayList<Carta> baraja) {
-        //mucho método...
+    private static Carta otraCarta(Scanner scanner, List<Carta> manoJugador) {
         System.out.println("Cartas en mano:");
-        for (int i = 0; i < baraja.size(); i++) {
-            System.out.println((i + 1) + ". " + baraja.get(i));
+        for (int i = 0; i < manoJugador.size(); i++) {
+            System.out.println((i + 1) + ". " + manoJugador.get(i));
         }
 
-        System.out.print("Selecciona una carta (1-" + baraja.size() + "): ");
+        System.out.print("Selecciona una carta (1-" + manoJugador.size() + "): ");
         int seleccion = scanner.nextInt() - 1;
 
-        while (seleccion < 0 || seleccion >= baraja.size()) {
-            System.out.print("Selección inválida. Por favor, selecciona una carta válida (1-" + baraja.size() + "): ");
+        while (seleccion < 0 || seleccion >= manoJugador.size()) {
+            System.out.print("Selección inválida. Por favor, selecciona una carta válida (1-" + manoJugador.size() + "): ");
             seleccion = scanner.nextInt() - 1;
         }
 
-        return baraja.get(seleccion);
+        return manoJugador.get(seleccion);
     }
 
     public static Carta LanzarCarta(Carta cartaActual, Carta cartaJugador, ArrayList<Carta> manoJugador) {
@@ -100,43 +98,7 @@ public class Jugador {
         }
         return cartaActual;
     }
-    public static Carta otraCarta(Scanner scanner, ArrayList<Carta> baraja) {
-        //mucho método...
-        System.out.println("Cartas en mano:");
-        for (int i = 0; i < baraja.size(); i++) {
-            System.out.println((i + 1) + ". " + baraja.get(i));
-        }
-
-        System.out.print("Selecciona una carta (1-" + baraja.size() + "): ");
-        int seleccion = scanner.nextInt() - 1;
-
-        while (seleccion < 0 || seleccion >= baraja.size()) {
-            System.out.print("Selección inválida. Por favor, selecciona una carta válida (1-" + baraja.size() + "): ");
-            seleccion = scanner.nextInt() - 1;
-        }
-
-        return baraja.get(seleccion);
-    }
-
-    public static void lanzarCarta(Carta cartaActual, Carta cartaJugador){
-        if(cartaActual instanceof CartaNormal){
-            CartaNormal CartaN = (CartaNormal) cartaActual;
-            if(cartaJugador.validarCarta(CartaN)){
-                System.out.println(cartaJugador);
-            }
-        } 
-        if(cartaActual instanceof CartaComodin){
-            CartaComodin CartaC =(CartaComodin) cartaActual;
-            if(cartaJugador.validarCarta(CartaC)){
-                System.out.println(cartaJugador);
-            }
-        }
-        if(cartaJugador instanceof ComodinEspecial){
-            ComodinEspecial CartaE = (ComodinEspecial) cartaJugador;
-            System.out.println(CartaE);
-        }
-    }
-
+    
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

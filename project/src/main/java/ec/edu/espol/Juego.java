@@ -115,7 +115,7 @@ public class Juego {
                 }
                 Carta CartaJugador = j1.getBarajaJugador().get(index);
                 
-                Carta cartaJugador =Jugador.LanzarCarta(CartaTablero,CartaJugador,(j1.getBarajaJugador()));
+                Carta cartaJugador = Jugador.LanzarCarta(CartaTablero,CartaJugador,(j1.getBarajaJugador()));
                 System.out.println("Carta en el tablero: "+ cartaJugador);
                 CartaTablero = cartaJugador;
                 j1.getBarajaJugador().remove(index);
