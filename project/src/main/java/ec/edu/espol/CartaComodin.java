@@ -26,8 +26,6 @@ public class CartaComodin extends Carta{
 
     @Override
     public String toString() {
-        return "Color: "+super.getCarta()+" Tipo: " +simbolo+"\n";
+        return super.toString() + " Tipo: " +simbolo+"\n";
     }
-
-    
 }

@@ -39,6 +39,7 @@ public class CartaBaraja {
                 cartas.add(new ComodinEspecial(Colores.N, "%"));
                 cartas.add(new ComodinEspecial(Colores.N, "%"));
             }
+        }
     }
 
     public void barajar(){
@@ -55,7 +56,7 @@ public class CartaBaraja {
         for(Carta c : cartas){
             s.append(c).append("");
         }
-        return s.toString().trim();
+        return s.toString();
     }
 
     

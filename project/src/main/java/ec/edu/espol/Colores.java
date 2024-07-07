@@ -1,5 +1,5 @@
 package ec.edu.espol;
 
-public enum Colores {
+public enum Colores{
     R,A,Z,N,V;
 }

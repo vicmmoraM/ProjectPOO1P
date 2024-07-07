@@ -3,7 +3,7 @@ package ec.edu.espol;
 import java.util.Scanner;
 /*
 * 
-* @author Victor. Valeninta, José
+* @author Victor, Valeninta, José
 *
 */
 public class Main {
@@ -15,7 +15,6 @@ public class Main {
         baraja.barajar();
         Jugador j1 = Juego.agregarJugador();
         Jugador j2 = new Jugador("Bot");
-        Juego juego = new Juego(j1,j2);
         j1.barajaInicial(baraja.getCartas());
         j2.barajaInicial(baraja.getCartas());
         System.out.println(j1);

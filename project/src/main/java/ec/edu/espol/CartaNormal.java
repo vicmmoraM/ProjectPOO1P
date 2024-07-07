@@ -28,7 +28,7 @@ public class CartaNormal extends Carta{
 
     @Override
     public String toString() {
-        return "Color: "+super.getCarta()+" Número: " + numero+"\n";
+        return super.toString() + " Número: " + numero+ "\n";
     }
 
     
