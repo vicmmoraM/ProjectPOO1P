@@ -31,13 +31,14 @@ public class CartaBaraja {
                 cartas.add(new CartaComodin(c,"&"));
                 cartas.add(new CartaComodin(c,"&"));
             }
-            cartas.add(new ComodinEspecial(c, "+2"));
-            cartas.add(new ComodinEspecial(c, "+2"));
-            cartas.add(new ComodinEspecial(c, "+4"));
-            cartas.add(new ComodinEspecial(c, "+4"));
-            cartas.add(new ComodinEspecial(c, "%"));
-            cartas.add(new ComodinEspecial(c, "%"));
-        }
+            else{
+                cartas.add(new ComodinEspecial(Colores.N, "+2"));
+                cartas.add(new ComodinEspecial(Colores.N, "+2"));
+                cartas.add(new ComodinEspecial(Colores.N, "+4"));
+                cartas.add(new ComodinEspecial(Colores.N, "+4"));
+                cartas.add(new ComodinEspecial(Colores.N, "%"));
+                cartas.add(new ComodinEspecial(Colores.N, "%"));
+            }
     }
 
     public void barajar(){
@@ -50,7 +51,11 @@ public class CartaBaraja {
 
     @Override
     public String toString() {
-        return "CartaBaraja [cartas=" + cartas + "]";
+        StringBuilder s = new StringBuilder();
+        for(Carta c : cartas){
+            s.append(c).append("");
+        }
+        return s.toString().trim();
     }
 
     
