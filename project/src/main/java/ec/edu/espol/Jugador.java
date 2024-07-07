@@ -1,6 +1,5 @@
 package ec.edu.espol;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Jugador {
     private String nombre;
@@ -32,7 +31,12 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "barajaJugador=" + barajaJugador;
+        StringBuilder s = new StringBuilder();
+        s.append("Nombre: ").append(nombre).append("\n");
+        for(Carta c : barajaJugador){ //se recorre cada elemento de la lista para agregarlo al stringbuilder
+            s.append(c).append("");
+        }
+        return s.toString(); //se convierte el stringbuilder en string 
     }
     
 }
