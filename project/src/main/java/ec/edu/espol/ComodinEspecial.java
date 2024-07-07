@@ -6,7 +6,7 @@ public class ComodinEspecial extends CartaComodin{
         super(carta, simbolo); //creada porque hay comodines de color N :o
     }
 
-     public static Colores elegirColor(){
+    public static Colores elegirColor(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Elija el color de la carta [R-A-V-Z]: ");
         String color = sc.nextLine().toUpperCase(); //convertir el texto en mayúscula

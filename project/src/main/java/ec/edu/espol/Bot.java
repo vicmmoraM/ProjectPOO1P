@@ -38,9 +38,9 @@ public class Bot{
                     int indiceNuevo = randomnum(barajabot.size() - 1);
                     cartaBot = barajabot.get(indiceNuevo);
                 }
-            } else if (cartaActual instanceof CartaComodin && cartaBot instanceof CartaComodin) {
-                CartaComodin cartaC = (CartaComodin) cartaActual;
-                if (cartaBot.validarCarta(cartaC)) {
+            } else if ((cartaActual instanceof CartaComodin && cartaBot instanceof CartaComodin) || cartaActual instanceof CartaNormal) {
+                CartaComodin cb = (CartaComodin) cartaBot;
+                if (cb.validarCarta(cartaActual)) {
                     cartaValida = true;
                     return cartaBot;
                 } else {

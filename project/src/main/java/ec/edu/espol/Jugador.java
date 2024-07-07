@@ -56,9 +56,10 @@ public class Jugador {
         while (!cartaValida) {
             // Validación de CartaNormal
             if (cartaActual instanceof CartaNormal && cartaJugador instanceof CartaNormal) {
-                CartaNormal cartaNormal = (CartaNormal) cartaActual;
+                CartaNormal cartaNormalActual = (CartaNormal) cartaActual;
+                CartaNormal cartaNormalJugador = (CartaNormal) cartaJugador;
     
-                if (cartaJugador.validarCarta(cartaNormal)) {
+                if (cartaNormalJugador.validarCarta(cartaNormalActual)) {
                     System.out.println("Carta normal válida: " + cartaJugador);
                     cartaValida = true;
                     return cartaJugador;
@@ -66,22 +67,23 @@ public class Jugador {
                     System.out.println("Carta normal inválida. Por favor, selecciona otra carta: ");
                     cartaJugador = otraCarta(scanner, manoJugador);
                 }
-            } else if (cartaActual instanceof CartaComodin && cartaJugador instanceof CartaComodin) {
-                CartaComodin cartaC = (CartaComodin) cartaActual;
-                if (cartaJugador.validarCarta(cartaC)) {
+            } 
+            // Validación de CartaComodin contra CartaNormal o CartaComodin
+            else if ((cartaActual instanceof CartaComodin && cartaJugador instanceof CartaComodin) || (cartaActual instanceof CartaNormal && cartaJugador instanceof CartaComodin)) {
+                CartaComodin cartaComodinJugador = (CartaComodin) cartaJugador;
+    
+                if (cartaComodinJugador.validarCarta(cartaActual)) {
                     System.out.println("Carta comodín válida: " + cartaJugador);
                     cartaValida = true;
                     return cartaJugador;
                 } else {
-                    System.out.println("Carta comodín inválida. Por favor, selecciona otra carta:");
-                    cartaJugador = otraCarta(scanner, manoJugador);
+                    ComodinEspecial cartaEspecialJugador = (ComodinEspecial) cartaJugador;
+                    System.out.println("Comodín especial: " + cartaEspecialJugador);
+                    cartaValida = true; // No se requiere validación para comodines especiales
+                    return cartaJugador;
                 }
-            } else if (cartaJugador instanceof ComodinEspecial) {
-                ComodinEspecial cartaE = (ComodinEspecial) cartaJugador;
-                System.out.println("Comodín especial: " + cartaE);
-                cartaValida = true; // No se requiere validación para comodines especiales
-                return cartaE;
-            } else {
+            } 
+            else {
                 System.out.println("Tipo de carta no compatible con la carta actual. Por favor, selecciona otra carta:");
                 cartaJugador = otraCarta(scanner, manoJugador);
             }
@@ -89,6 +91,7 @@ public class Jugador {
     
         return cartaJugador; // Devolver la carta válida final seleccionada
     }
+
     public static Colores ComodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {
         if (c instanceof ComodinEspecial) {
             ComodinEspecial ce = (ComodinEspecial) c;
@@ -106,10 +109,12 @@ public class Jugador {
                     Colores[] valoresColores = Colores.values(); // Obtener todos los valores del enum
                     Random random = new Random();
                     Colores colorBot = valoresColores[random.nextInt(valoresColores.length)]; // Obtener color aleatorio
+                    System.out.println(colorBot);
                     return colorBot;
                 }
                 else{
                     Colores color = ComodinEspecial.elegirColor();
+                    System.out.println(color);
                     return color;
                 }
             } else if (ce.getSimbolo().equals("+2")) {
@@ -126,10 +131,12 @@ public class Jugador {
                     Colores[] valoresColores = Colores.values(); // Obtener todos los valores del enum
                     Random random = new Random();
                     Colores colorBot = valoresColores[random.nextInt(valoresColores.length)]; // Obtener color aleatorio
+                    System.out.println(colorBot);
                     return colorBot;
                 }
                 else{
                     Colores color = ComodinEspecial.elegirColor();
+                    System.out.println(color);
                     return color;
                 }
             } else {
@@ -138,6 +145,26 @@ public class Jugador {
             }
         }
         return null; // Retornar null si la carta no es un ComodinEspecial o no se puede manejar
+    }
+
+    public static int Comodin(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual){
+        if(c instanceof CartaComodin){
+            CartaComodin cc = (CartaComodin) c;
+            if(cc.getSimbolo().equals("^")){
+                if (turnoActual == 0) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else if(cc.getSimbolo().equals("&")){
+                if (turnoActual == 0) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        }
+        return turnoActual;
     }
 
     public void mostrarInformacion() {

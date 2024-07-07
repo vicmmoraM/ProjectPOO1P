@@ -17,11 +17,7 @@ public class CartaComodin extends Carta{
     }
 
     public boolean validarCarta(Carta carta){
-        if (carta instanceof CartaComodin){
-            CartaComodin cartacomodin = (CartaComodin) carta;
-            return this.getCarta().equals(cartacomodin.getCarta());
-        }
-        return false;
+        return super.getCarta() == carta.getCarta();
     }
 
     @Override
