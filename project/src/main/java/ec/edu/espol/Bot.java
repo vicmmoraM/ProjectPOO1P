@@ -26,21 +26,21 @@ public class Bot{
         }
     }
 
-    public static void LanzarCartaB(Carta cartaActual, Carta CartaBot){
+    public static void lanzarCartaB(Carta cartaActual, Carta cartaBot){
         if(cartaActual instanceof CartaNormal){
             CartaNormal CartaN = (CartaNormal) cartaActual;
-            if(CartaBot.validarCarta(CartaN)){
-                System.out.println(CartaBot);
+            if(cartaBot.validarCarta(CartaN)){
+                System.out.println(cartaBot);
             }
         } 
         if(cartaActual instanceof CartaComodin){
             CartaComodin CartaC =(CartaComodin) cartaActual;
-            if(CartaBot.validarCarta(CartaC)){
-                System.out.println(CartaBot);
+            if(cartaBot.validarCarta(CartaC)){
+                System.out.println(cartaBot);
             }
         }
-        if(CartaBot instanceof ComodinEspecial){
-            ComodinEspecial CartaE = (ComodinEspecial) CartaBot;
+        if(cartaBot instanceof ComodinEspecial){
+            ComodinEspecial CartaE = (ComodinEspecial) cartaBot;
             System.out.println(CartaE);
         }
     }

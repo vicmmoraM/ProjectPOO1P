@@ -132,7 +132,7 @@ public class Juego {
                 System.out.println("Turno del BOT(ADRIAN)");
     
                 int num = Bot.Randomnum((bot.getBarajaJugador().size()));
-                Bot.LanzarCartaB(CartaTablero, (bot.getBarajaJugador().get(num)));
+                Bot.lanzarCartaB(CartaTablero, (bot.getBarajaJugador().get(num)));
                 Turno = Turno + 1;
             }
 

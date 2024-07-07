@@ -1,5 +1,6 @@
 package ec.edu.espol;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jugador {
     private String nombre;
@@ -29,21 +30,39 @@ public class Jugador {
         }
     }
 
-    public static void LanzarCarta(Carta cartaActual, Carta CartaJugador){
+    public static Carta otraCarta(Scanner scanner, ArrayList<Carta> baraja) {
+        //mucho método...
+        System.out.println("Cartas en mano:");
+        for (int i = 0; i < baraja.size(); i++) {
+            System.out.println((i + 1) + ". " + baraja.get(i));
+        }
+
+        System.out.print("Selecciona una carta (1-" + baraja.size() + "): ");
+        int seleccion = scanner.nextInt() - 1;
+
+        while (seleccion < 0 || seleccion >= baraja.size()) {
+            System.out.print("Selección inválida. Por favor, selecciona una carta válida (1-" + baraja.size() + "): ");
+            seleccion = scanner.nextInt() - 1;
+        }
+
+        return baraja.get(seleccion);
+    }
+
+    public static void lanzarCarta(Carta cartaActual, Carta cartaJugador){
         if(cartaActual instanceof CartaNormal){
             CartaNormal CartaN = (CartaNormal) cartaActual;
-            if(CartaJugador.validarCarta(CartaN)){
-                System.out.println(CartaJugador);
+            if(cartaJugador.validarCarta(CartaN)){
+                System.out.println(cartaJugador);
             }
         } 
         if(cartaActual instanceof CartaComodin){
             CartaComodin CartaC =(CartaComodin) cartaActual;
-            if(CartaJugador.validarCarta(CartaC)){
-                System.out.println(CartaJugador);
+            if(cartaJugador.validarCarta(CartaC)){
+                System.out.println(cartaJugador);
             }
         }
-        if(CartaJugador instanceof ComodinEspecial){
-            ComodinEspecial CartaE = (ComodinEspecial) CartaJugador;
+        if(cartaJugador instanceof ComodinEspecial){
+            ComodinEspecial CartaE = (ComodinEspecial) cartaJugador;
             System.out.println(CartaE);
         }
     }

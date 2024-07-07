@@ -1,7 +1,7 @@
 package ec.edu.espol;
 /*
 * 
-* @author Victor, Valeninta, José
+* @author Victor, Valentina, José
 *
 */
 public class Main {
