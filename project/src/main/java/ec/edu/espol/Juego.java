@@ -127,16 +127,7 @@ public class Juego {
                 System.out.print("Baraja Jugador:");
                 System.out.println(j1.getBarajaJugador());
                 // Validación Carta Correcta
-                System.out.println("Si quieres tomar una carta escribe 'si' caso contrario escribe 'no': ");
-                String chupar = sc.nextLine();
-                while(chupar.equals("si")){
-                    int entero = mazo.getCartas().size() - 1;
-                    Carta cartaañadir = mazo.getCartas().get(entero);
-                    j1.getBarajaJugador().add(cartaañadir);
-                    mazo.getCartas().remove(cartaañadir);
-                    turno = 0;
-                }    
-
+        
                 while (index < 1 || index > j1.getBarajaJugador().size()) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
                     System.out.println(j1.getBarajaJugador());
