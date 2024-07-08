@@ -52,7 +52,8 @@ public class Bot{
                 }
             }
         }
-        // Si no se encuentra ninguna carta válida, se puede manejar retornando null o lanzando una excepción según tu lógica de juego.
+        // Si no se encuentra ninguna carta válida, se puede manejar retornando null.
+        //Asi en la clase Juego implementar algún tipo de ciclo
         return null;
     }
 

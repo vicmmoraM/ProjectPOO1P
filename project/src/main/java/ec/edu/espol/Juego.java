@@ -113,7 +113,7 @@ public class Juego {
 
     public static void iniciarJuego(Jugador j1, Bot bot, CartaBaraja mazo, Carta cartaInicial) {
         Scanner sc = new Scanner(System.in);
-        int turno = 1;
+        int turno = 1; //Turno Jugador
         // Empieza el Juego
         while (!(j1.getBarajaJugador().isEmpty() || bot.getBarajaBot().isEmpty())) {
             // Verificar si el jugador tiene una carta válida para lanzar
@@ -138,17 +138,21 @@ public class Juego {
                 // Generamos cartaJugador
                 Carta cartaJugador = j1.getBarajaJugador().get(index - 1);
                 cartaJugador = j1.lanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
-
+                System.out.println("-------------------------");
                 System.out.println("Carta en el tablero: " + cartaJugador);
+                System.out.println("-------------------------");
                 System.out.print("Baraja Jugador: ");
                 System.out.println(j1.getBarajaJugador());
+                System.out.println("-------------------------");
                 // Aplicar efecto del comodín si es necesario
                 if (cartaJugador instanceof ComodinEspecial) {
                     Colores color = Jugador.comodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
                     Carta cartaNueva = new CartaNormal(color, 10);
                     j1.getBarajaJugador().remove(cartaJugador);
-                    System.out.print("Entre al método: ");
+                    System.out.println("-------------------------");
+                    System.out.print("Baraja Jugador: ");
                     System.out.println(j1.getBarajaJugador());
+                    System.out.println("-------------------------");
                     cartaInicial = cartaNueva;
                     j1.mostrarInformacion();
                     turno = 1;
