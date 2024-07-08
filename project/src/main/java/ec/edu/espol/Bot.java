@@ -45,6 +45,12 @@ public class Bot{
                     return cb;
                 }
             }
+            else if(cb instanceof CartaNormal && cartaActual instanceof CartaComodin){
+                CartaComodin cActualc = (CartaComodin) cartaActual;
+                if (cActualc.validarCarta(cb)){
+                    return cb;
+                }
+            }
         }
         // Si no se encuentra ninguna carta válida, se puede manejar retornando null o lanzando una excepción según tu lógica de juego.
         return null;

@@ -126,7 +126,7 @@ public class Juego {
     
                 System.out.print("Baraja Jugador:");
                 System.out.println(j1.getBarajaJugador());
-    
+                turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
                 // Validación Carta Correcta
                 while (index < 1 || index > j1.getBarajaJugador().size()) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
@@ -198,6 +198,7 @@ public class Juego {
                 
                 // Aplicar efecto del comodín si es necesario
                 if (cartaBot instanceof ComodinEspecial) {
+                    Colores color1 = Jugador.ComodinesEspeciales(cartaInicial, j1, bot, mazo, turno);
                     Random r = new Random();
                     Colores[] color = Colores.values();
                     int numero = r.nextInt(4);
