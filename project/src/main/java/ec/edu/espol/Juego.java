@@ -126,20 +126,27 @@ public class Juego {
     
                 System.out.print("Baraja Jugador:");
                 System.out.println(j1.getBarajaJugador());
-                turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
                 // Validación Carta Correcta
+                System.out.println("Si quieres tomar una carta escribe 'si' caso contrario escribe 'no': ");
+                String chupar = sc.nextLine();
+                while(chupar.equals("si")){
+                    int entero = mazo.getCartas().size() - 1;
+                    Carta cartaañadir = mazo.getCartas().get(entero);
+                    j1.getBarajaJugador().add(cartaañadir);
+                    mazo.getCartas().remove(cartaañadir);
+                }    
+
                 while (index < 1 || index > j1.getBarajaJugador().size()) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
                     System.out.println(j1.getBarajaJugador());
                     System.out.print("Escoge que carta quieres: (1 al " + (j1.getBarajaJugador().size()) + "): ");
                     index = sc.nextInt();
-                    sc.nextLine();
                 }
-    
+               
                 // Generamos cartaJugador
                 Carta cartaJugador = j1.getBarajaJugador().get(index - 1);
                 cartaJugador = j1.lanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
-    
+
                 System.out.println("Carta en el tablero: " + cartaJugador);
                 System.out.print("Baraja Jugador: ");
                 System.out.println(j1.getBarajaJugador());
@@ -203,8 +210,7 @@ public class Juego {
                     Colores[] color = Colores.values();
                     int numero = r.nextInt(4);
                     Carta cartaNueva = new CartaNormal(color[numero], 10);
-                    System.out.println(cartaNueva);
-                    System.out.println(cartaBot);
+                    System.out.println("Carta en el tablero: "+ cartaNueva);
                     bot.getBarajaBot().remove(cartaBot);
                     System.out.println(bot.getBarajaBot());
                     cartaInicial = cartaNueva;
