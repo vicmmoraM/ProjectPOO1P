@@ -35,6 +35,9 @@ public class Bot{
                     return cb;
                 }
             }
+            else if (cb instanceof ComodinEspecial) {// Retornar ComodinEspecial directamente
+                return cb;
+            }
             // Verificar si cb es CartaComodin y cartaActual es CartaNormal
             else if (cb instanceof CartaComodin && cartaActual instanceof CartaNormal) {
                 CartaComodin cbotc = (CartaComodin) cb;
@@ -42,15 +45,11 @@ public class Bot{
                     return cb;
                 }
             }
-            // Retornar ComodinEspecial directamente
-            else if (cb instanceof ComodinEspecial) {
-                return cb;
-            }
         }
         // Si no se encuentra ninguna carta válida, se puede manejar retornando null o lanzando una excepción según tu lógica de juego.
         return null;
     }
-    
+
     public static int randomnum(int cantidad){
         Random r = new Random();
         int numero = r.nextInt(cantidad);

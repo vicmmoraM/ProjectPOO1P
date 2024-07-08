@@ -43,6 +43,14 @@ public class Juego {
                     }
                 } 
             } 
+            if(cartaActual instanceof ComodinEspecial){
+                ComodinEspecial ce = (ComodinEspecial) cartaActual;
+                for(Carta c: j1.getBarajaJugador()){
+                    if(!(c.getCarta().equals(Colores.N))){
+                        contador++;
+                    }
+                }
+            }
             if(cartaActual instanceof CartaComodin){
                 CartaComodin cc = (CartaComodin)cartaActual;
                 for(Carta c : j1.getBarajaJugador()){
@@ -154,7 +162,7 @@ public class Juego {
                 } else {
                     cartaInicial = cartaJugador;
                     j1.getBarajaJugador().remove(cartaJugador); // Quitar la carta jugada
-                    turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
+                    turno = sinCarta(j1, bot, mazo, 1, cartaInicial);
                     turno = 0; // Cambio de turno
                     j1.mostrarInformacion();
                 }
@@ -190,8 +198,11 @@ public class Juego {
                 
                 // Aplicar efecto del comodín si es necesario
                 if (cartaBot instanceof ComodinEspecial) {
-                    Colores color = Jugador.ComodinesEspeciales(cartaBot, j1, bot, mazo, 0);
-                    Carta cartaNueva = new CartaNormal(color, 10);
+                    Random r = new Random();
+                    Colores[] color = Colores.values();
+                    int numero = r.nextInt(4);
+                    Carta cartaNueva = new CartaNormal(color[numero], 10);
+                    System.out.println(cartaNueva);
                     System.out.println(cartaBot);
                     bot.getBarajaBot().remove(cartaBot);
                     System.out.println(bot.getBarajaBot());
