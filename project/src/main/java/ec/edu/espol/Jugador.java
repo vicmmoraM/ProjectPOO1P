@@ -50,57 +50,51 @@ public class Jugador {
     }
     
     public static Carta LanzarCarta(Carta cartaActual, Carta cartaJugador, ArrayList<Carta> manoJugador) {
-        Scanner scanner = new Scanner(System.in);
-        boolean cartaValida = false;
-    
-        while (!cartaValida) {
-            // Validación de CartaNormal
-            if (cartaActual instanceof CartaNormal && cartaJugador instanceof CartaNormal) {
-                CartaNormal cartaNormalActual = (CartaNormal) cartaActual;
-                CartaNormal cartaNormalJugador = (CartaNormal) cartaJugador;
-    
-                if (cartaNormalJugador.validarCarta(cartaNormalActual)) {
-                    System.out.println("Carta normal válida: " + cartaJugador);
-                    cartaValida = true;
+        // 3 opciones Normal, Comodin, Especial <--- Jugador ; Tablero Normal o Comodin
+        Scanner sc = new Scanner(System.in);
+        boolean validar = true;
+        while(validar){
+            if(cartaJugador instanceof CartaNormal && cartaActual instanceof CartaNormal){
+                CartaNormal cnJugador = (CartaNormal) cartaJugador;
+                CartaNormal cnTablero = (CartaNormal) cartaActual;
+                if(cnJugador.validarCarta(cnTablero)){
                     return cartaJugador;
-                } else {
-                    System.out.println("Carta normal inválida. Por favor, selecciona otra carta: ");
-                    cartaJugador = otraCarta(scanner, manoJugador);
                 }
-            } 
-            // Validación de CartaComodin contra CartaNormal o CartaComodin
-            else if ((cartaActual instanceof CartaComodin && cartaJugador instanceof CartaComodin) || (cartaActual instanceof CartaNormal && cartaJugador instanceof CartaComodin)) {
-                CartaComodin cartaComodinJugador = (CartaComodin) cartaJugador;
-    
-                if (cartaComodinJugador.validarCarta(cartaActual)) {
-                    System.out.println("Carta comodín válida: " + cartaJugador);
-                    cartaValida = true;
-                    return cartaJugador;
-                } else {
-                    if(cartaJugador instanceof ComodinEspecial){
-                        ComodinEspecial cartaEspecialJugador = (ComodinEspecial) cartaJugador;
-                        System.out.println("Comodín especial: " + cartaEspecialJugador);
-                        cartaValida = true; // No se requiere validación para comodines especiales
-                        return cartaJugador;
-                    }
-                    else{
-                        CartaComodin comodinActual = (CartaComodin) cartaActual;
-                        if(comodinActual.validarCarta(cartaJugador)){
-                            System.out.println("Carta normal válida: " + cartaJugador);
-                            cartaValida = true;
-                            return cartaJugador;
-                        }
-                    }
-                
+                else{
+                    System.out.println("La carta no es válida: ");
+                    cartaJugador = otraCarta(sc, manoJugador);
                 }
+            }else if(cartaJugador instanceof ComodinEspecial){
+                    ComodinEspecial ce = (ComodinEspecial) cartaJugador;
+                    System.out.println("Carta Comodin Especial: ");
+                    return ce;
             }
-            else {
-                System.out.println("Tipo de carta no compatible con la carta actual. Por favor, selecciona otra carta:");
-                cartaJugador = otraCarta(scanner, manoJugador);
+            else if(cartaJugador instanceof CartaNormal && cartaActual instanceof CartaComodin){
+                CartaNormal cnJugador = (CartaNormal) cartaJugador;
+                CartaComodin cnTablero = (CartaComodin) cartaActual;
+                if(cnTablero.validarCarta(cnJugador)){
+                    return cartaJugador;
+                }
+                else{
+                    System.out.println("La carta normal no es válida: ");
+                    cartaJugador = otraCarta(sc, manoJugador);
+                }
+            }else if(cartaJugador instanceof CartaComodin && cartaActual instanceof CartaNormal){
+                CartaComodin cnJugador = (CartaComodin) cartaJugador;
+                CartaNormal cnTablero = (CartaNormal) cartaActual;
+                if(cnJugador.validarCarta(cnTablero)){
+                    return cartaJugador;
+                }
+                else{
+                    System.out.println("La carta normal no es válida: ");
+                    cartaJugador = otraCarta(sc, manoJugador);
+                }
+            }else{
+                validar = false;
             }
         }
-    
-        return cartaJugador; // Devolver la carta válida final seleccionada
+        return cartaJugador; 
+
     }
 
     public static Colores ComodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {
@@ -161,13 +155,7 @@ public class Jugador {
     public static int Comodin(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual){
         if(c instanceof CartaComodin){
             CartaComodin cc = (CartaComodin) c;
-            if(cc.getSimbolo().equals("^")){
-                if (turnoActual == 0) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            } else if(cc.getSimbolo().equals("&")){
+            if(cc.getSimbolo().equals("^") || cc.getSimbolo().equals("&")){
                 if (turnoActual == 0) {
                     return 0;
                 } else {

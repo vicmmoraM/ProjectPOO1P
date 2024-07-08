@@ -112,7 +112,7 @@ public class Juego {
             turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
     
             if (turno == 1) {
-                System.out.print("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + "): ");
+                System.out.print("Escoge que carta quieres: (1 al " + (j1.getBarajaJugador().size()) + "): ");
                 int index = sc.nextInt();
                 sc.nextLine(); // Consumir el salto de línea pendiente
     
@@ -120,33 +120,41 @@ public class Juego {
                 System.out.println(j1.getBarajaJugador());
     
                 // Validación Carta Correcta
-                while (index < 0 || index >= j1.getBarajaJugador().size()) {
+                while (index < 1 || index > j1.getBarajaJugador().size()) {
                     System.out.println("Ingrese un valor dentro del rango especificado!! >:|");
-                    System.out.print("Escoge que carta quieres: (0 al " + (j1.getBarajaJugador().size() - 1) + "): ");
+                    System.out.println(j1.getBarajaJugador());
+                    System.out.print("Escoge que carta quieres: (1 al " + (j1.getBarajaJugador().size()) + "): ");
                     index = sc.nextInt();
                     sc.nextLine();
                 }
     
                 // Generamos cartaJugador
-                Carta cartaJugador = j1.getBarajaJugador().get(index);
+                Carta cartaJugador = j1.getBarajaJugador().get(index - 1);
                 cartaJugador = j1.LanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
     
                 System.out.println("Carta en el tablero: " + cartaJugador);
+                System.out.print("Baraja Jugador: ");
+                System.out.println(j1.getBarajaJugador());
                 // Aplicar efecto del comodín si es necesario
                 if (cartaJugador instanceof ComodinEspecial) {
                     Colores color = Jugador.ComodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
                     Carta cartaNueva = new CartaNormal(color, 10);
                     j1.getBarajaJugador().remove(cartaJugador);
+                    System.out.print("Entre al método: ");
+                    System.out.println(j1.getBarajaJugador());
                     cartaInicial = cartaNueva;
                     j1.mostrarInformacion();
                     turno = 1;
                 } else if (cartaJugador instanceof CartaComodin) {
                     int turnoNuevo = Jugador.Comodin(cartaJugador, j1, bot, mazo, 1);
                     j1.getBarajaJugador().remove(cartaJugador);
+                    System.out.println("Entre al método Comodin");
+                    System.out.println(j1.getBarajaJugador());
                     turno = turnoNuevo;
                 } else {
                     cartaInicial = cartaJugador;
                     j1.getBarajaJugador().remove(cartaJugador); // Quitar la carta jugada
+                    turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
                     turno = 0; // Cambio de turno
                     j1.mostrarInformacion();
                 }
@@ -164,30 +172,42 @@ public class Juego {
                 turno = sinCarta(j1, bot, mazo, turno, cartaInicial);
     
                 // Carta aleatoria para el bot
-                int num = Bot.randomnum(bot.getBarajaBot().size());
-                Carta cartaBot = bot.getBarajaBot().get(num);
+
     
                 // Intentar lanzar la carta del bot
-                cartaBot = bot.lanzarCartaB(cartaInicial, cartaBot, bot.getBarajaBot());
+                Carta cartaBot = bot.lanzarCartaB(cartaInicial, bot.getBarajaBot());
+                while(bot.lanzarCartaB(cartaBot,bot.getBarajaBot()) == null){
+                    if(cartaBot == null){
+                        int index = mazo.getCartas().size() - 1;
+                        cartaBot = mazo.getCartas().get( index - 1 );
+                        bot.getBarajaBot().add(cartaBot);
+                        mazo.getCartas().remove(cartaBot);
+                    }
+                }
+                
     
                 System.out.println("Carta en el tablero: " + cartaBot);
-    
+                
                 // Aplicar efecto del comodín si es necesario
                 if (cartaBot instanceof ComodinEspecial) {
                     Colores color = Jugador.ComodinesEspeciales(cartaBot, j1, bot, mazo, 0);
                     Carta cartaNueva = new CartaNormal(color, 10);
+                    System.out.println(cartaBot);
                     bot.getBarajaBot().remove(cartaBot);
+                    System.out.println(bot.getBarajaBot());
                     cartaInicial = cartaNueva;
                     j1.mostrarInformacion();
                     turno = 0;
 
                 }else if (cartaBot instanceof CartaComodin) {
-                    int turnoNuevo = Jugador.Comodin(cartaBot, j1, bot, mazo, 1);
+                    int turnoNuevo = Jugador.Comodin(cartaBot, j1, bot, mazo, 0);
+                    bot.getBarajaBot().remove(cartaBot);
                     turno = turnoNuevo; 
                 }
                 else {
                     cartaInicial = cartaBot;
                     bot.getBarajaBot().remove(cartaBot); // Quitar la carta jugada
+                    System.out.println(bot.getBarajaBot());
                     turno = 1; // Cambio de turno
                     System.out.println("--------------------");
                 }
@@ -198,5 +218,10 @@ public class Juego {
         }
     
         sc.close(); // Cerrar el escáner al final del juego
+        if(j1.getBarajaJugador().isEmpty()){
+            System.out.println("Felicades "+ j1.getNombre() + "ganaste!!");
+        } else{
+            System.out.println("La Maquina Gano");
+        }
     }
 }
