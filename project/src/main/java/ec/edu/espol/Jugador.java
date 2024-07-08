@@ -49,7 +49,7 @@ public class Jugador {
         return manoJugador.get(seleccion);
     }
     
-    public static Carta LanzarCarta(Carta cartaActual, Carta cartaJugador, ArrayList<Carta> manoJugador) {
+    public static Carta lanzarCarta(Carta cartaActual, Carta cartaJugador, ArrayList<Carta> manoJugador) {
         // 3 opciones Normal, Comodin, Especial <--- Jugador ; Tablero Normal o Comodin
         Scanner sc = new Scanner(System.in);
         boolean validar = true;
@@ -97,7 +97,7 @@ public class Jugador {
 
     }
 
-    public static Colores ComodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {
+    public static Colores comodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {
         if (c instanceof ComodinEspecial) {
             ComodinEspecial ce = (ComodinEspecial) c;
             if (ce.getSimbolo().equals("+4")) {
@@ -152,7 +152,7 @@ public class Jugador {
         return null; // Retornar null si la carta no es un ComodinEspecial o no se puede manejar
     }
 
-    public static int Comodin(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual){
+    public static int comodin(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual){
         if(c instanceof CartaComodin){
             CartaComodin cc = (CartaComodin) c;
             if(cc.getSimbolo().equals("^") || cc.getSimbolo().equals("&")){

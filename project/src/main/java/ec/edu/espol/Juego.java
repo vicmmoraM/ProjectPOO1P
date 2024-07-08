@@ -138,14 +138,14 @@ public class Juego {
     
                 // Generamos cartaJugador
                 Carta cartaJugador = j1.getBarajaJugador().get(index - 1);
-                cartaJugador = j1.LanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
+                cartaJugador = j1.lanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
     
                 System.out.println("Carta en el tablero: " + cartaJugador);
                 System.out.print("Baraja Jugador: ");
                 System.out.println(j1.getBarajaJugador());
                 // Aplicar efecto del comodín si es necesario
                 if (cartaJugador instanceof ComodinEspecial) {
-                    Colores color = Jugador.ComodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
+                    Colores color = Jugador.comodinesEspeciales(cartaJugador, j1, bot, mazo, 1);
                     Carta cartaNueva = new CartaNormal(color, 10);
                     j1.getBarajaJugador().remove(cartaJugador);
                     System.out.print("Entre al método: ");
@@ -154,7 +154,7 @@ public class Juego {
                     j1.mostrarInformacion();
                     turno = 1;
                 } else if (cartaJugador instanceof CartaComodin) {
-                    int turnoNuevo = Jugador.Comodin(cartaJugador, j1, bot, mazo, 1);
+                    int turnoNuevo = Jugador.comodin(cartaJugador, j1, bot, mazo, 1);
                     j1.getBarajaJugador().remove(cartaJugador);
                     System.out.println("Entre al método Comodin");
                     System.out.println(j1.getBarajaJugador());
@@ -198,7 +198,7 @@ public class Juego {
                 
                 // Aplicar efecto del comodín si es necesario
                 if (cartaBot instanceof ComodinEspecial) {
-                    Colores color1 = Jugador.ComodinesEspeciales(cartaInicial, j1, bot, mazo, turno);
+                    Colores color1 = Jugador.comodinesEspeciales(cartaInicial, j1, bot, mazo, turno);
                     Random r = new Random();
                     Colores[] color = Colores.values();
                     int numero = r.nextInt(4);
@@ -212,7 +212,7 @@ public class Juego {
                     turno = 0;
 
                 }else if (cartaBot instanceof CartaComodin) {
-                    int turnoNuevo = Jugador.Comodin(cartaBot, j1, bot, mazo, 0);
+                    int turnoNuevo = Jugador.comodin(cartaBot, j1, bot, mazo, 0);
                     bot.getBarajaBot().remove(cartaBot);
                     turno = turnoNuevo; 
                 }

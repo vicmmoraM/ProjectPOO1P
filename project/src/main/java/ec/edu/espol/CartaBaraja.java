@@ -51,7 +51,7 @@ public class CartaBaraja {
         return cartas.remove(cartas.size()-1);
     }
 
-    public Carta CartaRandom(){
+    public Carta cartaRandom(){
         Random r = new Random();
         int indice = r.nextInt(cartas.size());
         Carta c = cartas.remove(indice);
