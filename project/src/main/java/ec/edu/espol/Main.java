@@ -8,6 +8,12 @@ public class Main {
     public static void main(String[] args) {
         CartaBaraja baraja = new CartaBaraja();
         System.out.println("-------------------\nBienvenido a UNO\n-------------------");
+        System.out.println("Tipo de Cartas: ");
+        System.out.println(" +2 --> Tomar dos cartas");
+        System.out.println(" +4 ---> Tomar cuatro cartas");
+        System.out.println(" % --> Cambio de color");
+        System.out.println(" ^ --> Reverse");
+        System.out.println(" & --> Bloqueo");
         baraja.generarCartas();
         baraja.barajar();
         Jugador j1 = Juego.agregarJugador();
