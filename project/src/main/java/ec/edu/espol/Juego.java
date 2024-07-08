@@ -134,6 +134,7 @@ public class Juego {
                     Carta cartaañadir = mazo.getCartas().get(entero);
                     j1.getBarajaJugador().add(cartaañadir);
                     mazo.getCartas().remove(cartaañadir);
+                    turno = 0;
                 }    
 
                 while (index < 1 || index > j1.getBarajaJugador().size()) {
