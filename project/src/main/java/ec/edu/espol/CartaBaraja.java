@@ -1,5 +1,5 @@
 package ec.edu.espol;
-import java.util.*;
+import java.util.List;
 
 public class CartaBaraja {
     private List<Carta> cartas;
@@ -37,8 +37,15 @@ public class CartaBaraja {
     }
 
     private void addCartasComodin(Colores color, String simbolo, int cont){
-        for(int i = 0; i<cont; i++){
-            cartas.add(new CartaComodin(color,simbolo));
+        if(color != Colores.N){
+            for(int i = 0; i<cont; i++){
+                cartas.add(new CartaComodin(color,simbolo));
+            }
+        }
+        else{
+            for(int i = 0; i<cont; i++){
+                cartas.add(new ComodinEspecial(Colores.N,simbolo));
+            }
         }
     }
 

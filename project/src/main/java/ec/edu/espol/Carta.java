@@ -11,7 +11,7 @@ public abstract class Carta {
         return color;
     }
 
-    public void setCarta(Colores color) {
+    public void setColor(Colores color) {
         this.color = color;
     }
 
