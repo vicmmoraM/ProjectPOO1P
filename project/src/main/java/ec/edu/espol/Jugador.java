@@ -37,15 +37,12 @@ public class Jugador {
         for (int i = 0; i < manoJugador.size(); i++) {
             System.out.println((i + 1) + ". " + manoJugador.get(i));
         }
-    
         System.out.print("Selecciona una carta (1-" + manoJugador.size() + "):  ");
         int seleccion = scanner.nextInt() - 1;
-    
         while (seleccion < 0 || seleccion >= manoJugador.size()) {
             System.out.print("Selección inválida. Por favor, selecciona una carta válida (1-" + manoJugador.size() + "): ");
             seleccion = scanner.nextInt() - 1;
         }
-    
         return manoJugador.get(seleccion);
     }
     

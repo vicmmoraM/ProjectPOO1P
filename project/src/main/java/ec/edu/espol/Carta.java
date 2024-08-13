@@ -1,21 +1,21 @@
 package ec.edu.espol;
 
 public abstract class Carta {
-    private Colores carta;
+    private Colores color;
 
-    protected Carta(Colores carta){
-        this.carta = carta;
+    protected Carta(Colores color){
+        this.color = color;
     }
 
-    public Colores getCarta() {
-        return carta;
+    public Colores getColor() {
+        return color;
     }
 
-    public void setCarta(Colores carta) {
-        this.carta = carta;
+    public void setCarta(Colores color) {
+        this.color = color;
     }
 
-    public abstract boolean validarCarta(Carta carta);
+    public abstract boolean validarCarta(Carta color);
 
     @Override
     public String toString() {

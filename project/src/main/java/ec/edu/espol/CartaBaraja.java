@@ -25,19 +25,20 @@ public class CartaBaraja {
                 for(int i = 0; i<=9; i++){
                     cartas.add(new CartaNormal(c,i));
                 }
-                cartas.add(new CartaComodin(c,"^"));
-                cartas.add(new CartaComodin(c,"^"));
-                cartas.add(new CartaComodin(c,"&"));
-                cartas.add(new CartaComodin(c,"&"));
+                addCartasComodin(c,"^",2);
+                addCartasComodin(c,"&",2);
             }
             else{
-                cartas.add(new ComodinEspecial(Colores.N, "+2"));
-                cartas.add(new ComodinEspecial(Colores.N, "+2"));
-                cartas.add(new ComodinEspecial(Colores.N, "+4"));
-                cartas.add(new ComodinEspecial(Colores.N, "+4"));
-                cartas.add(new ComodinEspecial(Colores.N, "%"));
-                cartas.add(new ComodinEspecial(Colores.N, "%"));
+                addCartasComodin(Colores.N,"+2",2);
+                addCartasComodin(Colores.N,"+4",2);
+                addCartasComodin(Colores.N,"%",2);
             }
+        }
+    }
+
+    private void addCartasComodin(Colores color, String simbolo, int cont){
+        for(int i = 0; i<cont; i++){
+            cartas.add(new CartaComodin(color,simbolo));
         }
     }
 
