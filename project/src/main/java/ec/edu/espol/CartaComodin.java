@@ -17,7 +17,7 @@ public class CartaComodin extends Carta{
     }
 
     public boolean validarCarta(Carta carta){
-        return super.getCarta() == carta.getCarta();
+        return super.getColor() == carta.getColor();
     }
 
     @Override

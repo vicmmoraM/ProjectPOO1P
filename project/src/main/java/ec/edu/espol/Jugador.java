@@ -91,7 +91,6 @@ public class Jugador {
             }
         }
         return cartaJugador; 
-
     }
 
     public static Colores comodinesEspeciales(Carta c, Jugador j1, Bot bot, CartaBaraja mazo, int turnoActual) {

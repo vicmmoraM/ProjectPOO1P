@@ -1,5 +1,6 @@
 package ec.edu.espol;
 import java.util.Scanner;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -123,9 +124,8 @@ public class Juego {
         System.out.println("-------------------------");
     
         if (cartaJugador instanceof ComodinEspecial) {
-            ComodinEspecial(j1, bot, mazo);
-            cartaInicial = new CartaNormal(Colores.values()[new Random().nextInt(Colores.values().length)], 10);
-            turno = 0; // Cambio de turno
+            cartaInicial = ComodinEspecial(j1, bot, mazo);
+            turno = 0; 
         } else if (cartaJugador instanceof CartaComodin) {
             int turnoNuevo = Jugador.comodin(cartaJugador, j1, bot, mazo, 1);
             j1.getBarajaJugador().remove(cartaJugador);
@@ -154,13 +154,19 @@ public class Juego {
         return index;
     }
 
-    private static void ComodinEspecial(Jugador j1, Bot bot, CartaBaraja mazo) {
-        Colores color = Jugador.comodinesEspeciales(null, j1, bot, mazo, 1); 
-        Carta cartaNueva = new CartaNormal(color, 10);
+    private static Carta ComodinEspecial(Jugador j1, Bot bot, CartaBaraja mazo) {
+        Random r = new Random();
+        Colores[] colores = Colores.values();
+        Colores colorAleatorio = colores[r.nextInt(colores.length)];
+    
+        Carta cartaNueva = new CartaNormal(colorAleatorio, 10);
         j1.getBarajaJugador().removeIf(carta -> carta instanceof ComodinEspecial);
+    
         System.out.println("-------------------------");
         System.out.println("Baraja Jugador: " + j1.getBarajaJugador());
         System.out.println("-------------------------");
+    
+        return cartaNueva;
     }
 
     private static int TurnoBot(Jugador j1, Bot bot, CartaBaraja mazo, Carta cartaInicial) {

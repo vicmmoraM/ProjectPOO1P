@@ -19,7 +19,7 @@ public class CartaNormal extends Carta{
     public boolean validarCarta(Carta carta){
         if(carta instanceof CartaNormal){
             CartaNormal cn = (CartaNormal) carta; 
-            if(this.getCarta().equals(cn.getCarta()) || this.getNumero() == cn.getNumero()){
+            if(this.getColor().equals(cn.getColor()) || this.getNumero() == cn.getNumero()){
                 return true;
             }
         }
