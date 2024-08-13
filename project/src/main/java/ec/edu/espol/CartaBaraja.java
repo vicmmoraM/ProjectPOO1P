@@ -1,20 +1,18 @@
 package ec.edu.espol;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class CartaBaraja {
-    private ArrayList<Carta> cartas;
+    private List<Carta> cartas;
 
     public CartaBaraja(){
         this.cartas = new ArrayList<>();
     }
 
-    public ArrayList<Carta> getCartas() {
+    public List<Carta> getCartas() {
         return cartas;
     }
 
-    public void setCartas(ArrayList<Carta> cartas) {
+    public void setCartas(List<Carta> cartas) {
         this.cartas = cartas;
     }
     /*

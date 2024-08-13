@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Jugador {
     private String nombre;
-    private ArrayList<Carta> barajaJugador;
+    private List<Carta> barajaJugador;
 
     public Jugador(String nombre){
         this.nombre = nombre;
@@ -19,14 +19,14 @@ public class Jugador {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public ArrayList<Carta> getBarajaJugador() {
+    public List<Carta> getBarajaJugador() {
         return barajaJugador;
     }
-    public void setBarajaJugador(ArrayList<Carta> barajaJugador) {
+    public void setBarajaJugador(List<Carta> barajaJugador) {
         this.barajaJugador = barajaJugador;
     }
 
-    public void barajaInicial(ArrayList<Carta> cartaBaraja){
+    public void barajaInicial(List<Carta> cartaBaraja){
         for(int i = 0; i < 7; i++){
             barajaJugador.add(cartaBaraja.remove(cartaBaraja.size()-1));
         }
@@ -49,7 +49,7 @@ public class Jugador {
         return manoJugador.get(seleccion);
     }
     
-    public static Carta lanzarCarta(Carta cartaActual, Carta cartaJugador, ArrayList<Carta> manoJugador) {
+    public static Carta lanzarCarta(Carta cartaActual, Carta cartaJugador, List<Carta> manoJugador) {
         // 3 opciones Normal, Comodin, Especial <--- Jugador ; Tablero Normal o Comodin
         Scanner sc = new Scanner(System.in);
         boolean validar = true;

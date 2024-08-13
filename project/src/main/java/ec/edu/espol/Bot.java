@@ -2,7 +2,6 @@ package ec.edu.espol;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Bot{
     private String nombre;
@@ -29,39 +28,34 @@ public class Bot{
 
     public static Carta lanzarCartaB(Carta cartaActual, List<Carta> barajabot) {
         for (Carta cb : barajabot) {
-            // Verificar si cb es CartaNormal y cartaActual también es CartaNormal
-            if (cb instanceof CartaNormal && cartaActual instanceof CartaNormal) {
-                CartaNormal cbot = (CartaNormal) cb;
-                if (cbot.validarCarta(cartaActual)) {
-                    return cb;
-                }
-            }
-            else if (cb instanceof ComodinEspecial) {// Retornar ComodinEspecial directamente
+            if (esNormalValida(cb, cartaActual) || esComodinEspecial(cb) || esCartaComodinValida(cb, cartaActual)) {
                 return cb;
             }
-            // Verificar si cb es CartaComodin y cartaActual es CartaNormal
-            else if (cb instanceof CartaComodin && cartaActual instanceof CartaNormal) {
-                CartaComodin cbotc = (CartaComodin) cb;
-                if (cbotc.validarCarta(cartaActual)) {
-                    return cb;
-                }
-            }
-            else if(cb instanceof CartaNormal && cartaActual instanceof CartaComodin){
-                CartaComodin cActualc = (CartaComodin) cartaActual;
-                if (cActualc.validarCarta(cb)){
-                    return cb;
-                }
-            }
         }
-        // Si no se encuentra ninguna carta válida, se puede manejar retornando null.
-        //Asi en la clase Juego implementar algún tipo de ciclo
-        return null;
+        return null; 
     }
 
-    public static int randomnum(int cantidad){
-        Random r = new Random();
-        int numero = r.nextInt(cantidad);
-        return numero;
+    public static boolean esNormalValida(Carta cartaActual, Carta cb){
+        if (cb instanceof CartaNormal && cartaActual instanceof CartaNormal) {
+            CartaNormal cbot = (CartaNormal) cb;
+            return cbot.validarCarta(cartaActual);
+        } else if (cb instanceof CartaNormal && cartaActual instanceof CartaComodin) {
+            CartaComodin cActualc = (CartaComodin) cartaActual;
+            return cActualc.validarCarta(cb);
+        }
+        return false;
+    } 
+
+    private static boolean esComodinEspecial(Carta cb){
+        return cb instanceof ComodinEspecial;
+    }
+
+    private static boolean esCartaComodinValida(Carta cb, Carta cartaActual) {
+        if (cb instanceof CartaComodin && cartaActual instanceof CartaNormal) {
+            CartaComodin cbotc = (CartaComodin) cb;
+            return cbotc.validarCarta(cartaActual);
+        }
+        return false;
     }
 
     @Override

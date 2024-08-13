@@ -134,7 +134,6 @@ public class Juego {
                     System.out.print("Escoge que carta quieres: (1 al " + (j1.getBarajaJugador().size()) + "): ");
                     index = sc.nextInt();
                 }
-               
                 // Generamos cartaJugador
                 Carta cartaJugador = j1.getBarajaJugador().get(index - 1);
                 cartaJugador = j1.lanzarCarta(cartaInicial, cartaJugador, j1.getBarajaJugador());
