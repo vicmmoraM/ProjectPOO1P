@@ -1,5 +1,6 @@
 package ec.edu.espol;
 import java.util.Scanner;
+import java.util.List;
 import java.util.Random;
 
 public class Juego {
@@ -32,65 +33,40 @@ public class Juego {
         return jugador;
     }
     
-    public static int sinCarta(Jugador j1, Bot bot, CartaBaraja mazo,int turno,Carta cartaActual){
-        int contador = 0;
-        if(turno == 1){
-            if(cartaActual instanceof CartaNormal){
-                CartaNormal carta = (CartaNormal)cartaActual;
-                for(Carta c : j1.getBarajaJugador()){
-                    if(!(c.validarCarta(carta))){
-                        contador++;
-                    }
-                } 
-            } 
-            if(cartaActual instanceof ComodinEspecial){
-                ComodinEspecial ce = (ComodinEspecial) cartaActual;
-                for(Carta c: j1.getBarajaJugador()){
-                    if(!(c.getCarta().equals(Colores.N))){
-                        contador++;
-                    }
-                }
+    public static int sinCarta(Jugador j1, Bot bot, CartaBaraja mazo, int turno, Carta cartaActual) {
+        if (turno == 1) {
+            if (verificarCartasNoCoinciden(j1.getBarajaJugador(), cartaActual)) {
+                j1.getBarajaJugador().add(mazo.TomarCarta());
+                return turno - 1;
             }
-            if(cartaActual instanceof CartaComodin){
-                CartaComodin cc = (CartaComodin)cartaActual;
-                for(Carta c : j1.getBarajaJugador()){
-                    if(!(cc.validarCarta(c))){
-                        contador++;
-                    }
-                }
+        } else {
+            if (verificarCartasNoCoinciden(bot.getBarajaBot(), cartaActual)) {
+                bot.getBarajaBot().add(mazo.TomarCarta());
+                return turno + 1;
             }
-            if(contador == j1.getBarajaJugador().size()){
-                j1.getBarajaJugador().add(mazo.chuparCarta());
-                turno-=1;
-                return turno;
-            }
-            return turno;
         }
+        return turno;
+    }
 
-        else{
-            if(cartaActual instanceof CartaNormal){
-                CartaNormal carta = (CartaNormal)cartaActual;
-                for(Carta c : bot.getBarajaBot()){
-                    if(!(c.validarCarta(carta))){
-                        contador++;
-                    }
-                } 
-            } 
-            if(cartaActual instanceof CartaComodin){
-                CartaComodin cc = (CartaComodin)cartaActual;
-                for(Carta c : bot.getBarajaBot()){
-                    if(!(cc.validarCarta(c))){
-                        contador++;
-                    }
-                }
+    private static boolean verificarCartasNoCoinciden(List<Carta> baraja, Carta cartaActual) {
+        int contador = 0;
+        for (Carta c : baraja) {
+            if (!validarCarta(c, cartaActual)) {
+                contador++;
             }
-            if(contador == bot.getBarajaBot().size()){
-                bot.getBarajaBot().add(mazo.chuparCarta());
-                turno += 1;
-                return turno;
-                }
-            return turno;
         }
+        return contador == baraja.size();
+    }
+
+    private static boolean validarCarta(Carta c, Carta cartaActual) {
+        if (cartaActual instanceof CartaNormal) {
+            return c.validarCarta((CartaNormal) cartaActual);
+        } else if (cartaActual instanceof ComodinEspecial) {
+            return !c.getCarta().equals(Colores.N);
+        } else if (cartaActual instanceof CartaComodin) {
+            return ((CartaComodin) cartaActual).validarCarta(c);
+        }
+        return false;
     }
 
 

@@ -30,6 +30,4 @@ public class CartaNormal extends Carta{
     public String toString() {
         return super.toString() + numero + " ";
     }
-
-    
 }

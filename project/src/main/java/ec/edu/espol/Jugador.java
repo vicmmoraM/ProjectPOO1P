@@ -103,7 +103,7 @@ public class Jugador {
             if (ce.getSimbolo().equals("+4")) {
                 System.out.println("Chupa cuatro cartas :(");
                 for (int i = 0; i < 4; i++) {
-                    Carta cartaChupada = mazo.chuparCarta();
+                    Carta cartaChupada = mazo.TomarCarta();
                     if (turnoActual == 0) {
                         j1.getBarajaJugador().add(cartaChupada);
                     } else {
@@ -125,7 +125,7 @@ public class Jugador {
             } else if (ce.getSimbolo().equals("+2")) {
                 System.out.println("Toma dos cartas :(");
                 for (int i = 0; i < 2; i++) {
-                    Carta cartaChupada = mazo.chuparCarta();
+                    Carta cartaChupada = mazo.TomarCarta();
                     if (turnoActual == 0) {
                         j1.getBarajaJugador().add(cartaChupada);
                     } else {
@@ -187,6 +187,4 @@ public class Jugador {
         }
         return s.toString(); //se convierte el stringbuilder en string 
     }
-
-    
 }

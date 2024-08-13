@@ -45,7 +45,7 @@ public class CartaBaraja {
         Collections.shuffle(cartas);
     }
 
-    public Carta chuparCarta(){ //la baraja esta de cabeza y asi se chupa la carta final
+    public Carta TomarCarta(){ //la baraja esta de cabeza y asi se chupa la carta final
         return cartas.remove(cartas.size()-1);
     }
 
