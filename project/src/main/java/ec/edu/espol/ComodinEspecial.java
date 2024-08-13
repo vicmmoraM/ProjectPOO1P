@@ -15,7 +15,7 @@ public class ComodinEspecial extends CartaComodin{
             case "R" -> Colores.R;
             case "A" -> Colores.A;
             case "V" -> Colores.V;
-            default -> Colores.Z
+            default -> Colores.Z;
         };
     }
 
