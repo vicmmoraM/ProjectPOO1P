@@ -155,33 +155,16 @@ public class Juego {
     }
 
     private static Carta ComodinEspecial(Jugador j1, Bot bot, CartaBaraja mazo) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Por favor, elige un color:");
-        System.out.println("1. Rojo");
-        System.out.println("2. Azul");
-        System.out.println("3. Verde");
-        System.out.println("4. Amarillo");
-        int opcionColor = scanner.nextInt();
-        Colores colorElegido;
-        if (opcionColor == 1) {
-            colorElegido = Colores.R;
-        } else if (opcionColor == 2) {
-            colorElegido = Colores.Z;
-        } else if (opcionColor == 3) {
-            colorElegido = Colores.V;
-        } else if (opcionColor == 4) {
-            colorElegido = Colores.A;
-        } else {
-            System.out.println("Opción inválida. Se asignará el color Rojo por defecto.");
-            colorElegido = Colores.R;
-        }
+        Colores colorElegido = ComodinEspecial.elegirColor();
         Carta cartaNueva = new CartaNormal(colorElegido, 10);
+        
         for (int i = 0; i < j1.getBarajaJugador().size(); i++) {
             if (j1.getBarajaJugador().get(i) instanceof ComodinEspecial) {
                 j1.getBarajaJugador().remove(i);
                 i--; // Ajustar el índice después de la eliminación
             }
         }
+    
         System.out.println("-------------------------");
         System.out.println("Baraja Jugador: " + j1.getBarajaJugador());
         System.out.println("-------------------------");

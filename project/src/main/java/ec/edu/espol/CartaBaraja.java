@@ -1,5 +1,5 @@
 package ec.edu.espol;
-import java.util.List;
+import java.util.*;
 
 public class CartaBaraja {
     private List<Carta> cartas;

@@ -26,6 +26,4 @@ public class ComodinEspecial extends CartaComodin{
         }
         return color;
     }
-
-    public 
 }
