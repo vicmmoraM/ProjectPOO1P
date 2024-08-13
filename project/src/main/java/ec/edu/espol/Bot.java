@@ -1,32 +1,33 @@
 package ec.edu.espol;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Bot{
-     private String nombre;
-    private ArrayList<Carta> barajaBot;
+    private String nombre;
+    private List<Carta> barajaBot;
 
     public Bot(){
         this.nombre = "Bot";
         this.barajaBot = new ArrayList<>();
     }
 
-    public ArrayList<Carta> getBarajaBot(){
+    public List<Carta> getBarajaBot(){
         return barajaBot;
     }
 
-    public void setBarajaBot(ArrayList<Carta> barajaBot){
+    public void setBarajaBot(List<Carta> barajaBot){
         this.barajaBot = barajaBot;
     }
 
-    public void barajaInicialB(ArrayList<Carta> cartaBaraja){
+    public void barajaInicialB(List<Carta> cartaBaraja){
         for(int i = 0; i < 7; i++){
             barajaBot.add(cartaBaraja.remove(cartaBaraja.size()-1));
         }
     }
 
-    public static Carta lanzarCartaB(Carta cartaActual, ArrayList<Carta> barajabot) {
+    public static Carta lanzarCartaB(Carta cartaActual, List<Carta> barajabot) {
         for (Carta cb : barajabot) {
             // Verificar si cb es CartaNormal y cartaActual también es CartaNormal
             if (cb instanceof CartaNormal && cartaActual instanceof CartaNormal) {
