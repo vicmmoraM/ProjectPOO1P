@@ -63,8 +63,9 @@ public class Bot{
         StringBuilder s = new StringBuilder();
         s.append("Nombre: ").append(nombre).append("\n");
         for(Carta c : barajaBot){ //se recorre cada elemento de la lista para agregarlo al stringbuilder
-            s.append(c).append("");
+            s.append(c.toString()).append(", ");
         }
+        s.deleteCharAt(s.length()-1).deleteCharAt(s.length()-1); //se elimina el último ", "
         return s.toString(); //se convierte el stringbuilder en string 
     }
 }
